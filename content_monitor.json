@@ -1,0 +1,30 @@
+[
+    {
+        "category": [
+                        "history",
+                        "npr"
+                    ],
+        "name": "Throughline",
+        "FeedLink": "https://feeds.npr.org/510333/podcast.xml"
+    },
+    {
+        "category": [
+                        "history",
+                        "politics",
+                        "Foriegn Affairs"
+                    ],
+        "name": "Fareed Zakaria",
+        "FeedLink": "https://feeds.megaphone.fm/WMHY7703459968"
+    },
+    {
+        "category": [
+                        "politics",
+                        "Foriegn Affairs"
+                    ],
+        "name": "Foriegn Affairs",
+        "FeedLink": "https://feed.podbean.com/foreignaffairsmagazine/feed.xml"
+    }
+
+
+]
+
