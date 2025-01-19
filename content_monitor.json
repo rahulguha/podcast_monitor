@@ -4,7 +4,7 @@
                         "history",
                         "npr"
                     ],
-        "name": "Throughline",
+        "name": "NPR - Throughline",
         "FeedLink": "https://feeds.npr.org/510333/podcast.xml"
     },
     {
@@ -23,6 +23,16 @@
                     ],
         "name": "Foriegn Affairs",
         "FeedLink": "https://feed.podbean.com/foreignaffairsmagazine/feed.xml"
+    },
+    {
+        "category": [
+            "India",
+            "Politics",
+            "Humour"
+        ],
+        "name": "Beer Biceps - The Ranveer Show",
+        "FeedLink": "https://feeds.simplecast.com/7PWFZi_d"
+
     }
 
 

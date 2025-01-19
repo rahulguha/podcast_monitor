@@ -1,10 +1,8 @@
 
 from monitor_podcast import *
 from util import *
-from transcribe1 import *
-# from summarizers import *
-from summarizer1 import *
-
+from transcribe import *
+from summarizer import *
 
 from dotenv import load_dotenv
 load_dotenv()

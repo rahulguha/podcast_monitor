@@ -2,12 +2,18 @@
 import json
 import os
 import re
+from typing import List, Dict, Optional 
 from string import Template
+from dotenv import load_dotenv
+load_dotenv()
+
 # import yt_dlp
 import sys
 from datetime import datetime
 from datetime import date, datetime
 from email_client import MailjetClient
+from s3Connect import S3Uploader
+
 
 def generate_python_friendly_filename(input_string):
   """
@@ -60,6 +66,12 @@ def create_file(filename, content):
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as f:   # Opens file and casts as f 
         f.write(content )       # Writing
+def get_now() ->str:
+  now = datetime.now()
+  formatted_date = now.strftime("%m-%d-%Y")
+  return formatted_date
+
+   
 def my_hook(d):
     if d['status'] == 'downloading':
         print ("###### downloading "+ str(round(float(d['downloaded_bytes'])/float(d['total_bytes'])*100,1))+"%")
@@ -166,15 +178,61 @@ def send_mail(content):
   # except:
   #   print ("error sending email")
 
-  
-  
+def create_s3_file(filename, content, prefix):
+  formatted_date = get_now()
+  uploader = S3Uploader(
+    bucket_name="podcast.monitor",
+    prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
+  )
+  uploader.upload_string(
+        content=content,
+        key=filename  # Will be uploaded as "data/2024/hello.txt"
+    ) 
+def list_s3_files(
+  bucket_name: str,
+  prefix: str = "",
+  suffix: str = None,
+  max_files: int = None
+  ) -> List[Dict]:
+    """
+    List files in an S3 bucket under a specific prefix (folder)
+    
+    Args:
+        bucket_name (str): Name of the S3 bucket
+        prefix (str): Folder path in S3 (optional)
+        suffix (str): Filter files by extension (e.g., '.csv', '.txt')
+        max_files (int): Maximum number of files to return (optional)
+    
+    Returns:
+        List[Dict]: List of dictionaries containing file information
+    """
+    now = datetime.now()
+    formatted_date = now.strftime("%m-%d-%y")
+    
+    uploader = S3Uploader(
+      bucket_name=bucket_name,
+      prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
+    )
+    
+    return uploader.list_files_by_bucket(bucket_name, prefix)
+def get_bucket_name() ->str:
+   return os.getenv("S3_BUCKET")
+def read_s3_file(  key) ->str:
+  formatted_date = get_now()  
+
+  uploader = S3Uploader(
+      bucket_name=get_bucket_name(),
+      prefix=""  # All files will be uploaded under this prefix
+    )
+  return uploader.read_s3_file(key)
 
 
-def summary_to_html(episode_name, episode_link, sum_text):
+def summary_to_html(podcast_name="", episode_name="", episode_link="", sum_text=""):
   
 
   # Sample JSON data
   data = {
+      "podcast_name": podcast_name,
       "episode_name": episode_name,
       "episode_link": episode_link,
       "sum_text": sum_text
@@ -182,8 +240,10 @@ def summary_to_html(episode_name, episode_link, sum_text):
 
   # HTML Template as string with placeholders
   html_template = """
-      <h2>${episode_name}</h2>
-      <div><a href=${episode_link}> Open Episode</a></dov>
+      <h2>${podcast_name}</h2>
+      <h3>${episode_name}</h3>
+      <div><a href=${episode_link}> Open Episode</a></div>
+      <br/>
       <div>${sum_text}</div>
   """
 

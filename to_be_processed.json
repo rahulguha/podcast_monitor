@@ -1,17 +1,10 @@
 [
     {
         "name": "Ralph Nader, Consumer Crusader (Throwback)",
-        "podcast_name": "Throughline",
+        "podcast_name": "NPR - Throughline",
         "episode_link": "https://www.npr.org/2025/01/16/1224897141/ralph-nader-consumer-crusader-throwback",
         "link": "https://chrt.fm/track/138C95/prfx.byspotify.com/e/play.podtrac.com/npr-510333/traffic.megaphone.fm/NPR1500547349.mp3?d=2799&size=44786504&e=1224897141&t=podcast&p=510333",
         "pub_time": "Thu, 16 Jan 2025 08:00:59 +0000"
-    },
-    {
-        "name": "Former Danish PM on Trump\u2019s Greenland Rhetoric",
-        "podcast_name": "Fareed Zakaria",
-        "episode_link": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chrt.fm/track/E31CC9/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY7132457462.mp3?updated=1736741091",
-        "link": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chrt.fm/track/E31CC9/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY7132457462.mp3?updated=1736741091",
-        "pub_time": "Mon, 13 Jan 2025 03:58:00 -0000"
     },
     {
         "name": "How Will the World Navigate Trump\u2019s Return?",
@@ -19,5 +12,12 @@
         "episode_link": "https://foreignaffairsmagazine.podbean.com/e/how-will-the-world-navigate-trump-s-return/",
         "link": "https://mcdn.podbean.com/mf/web/k9k5ak5wr6at3dxy/FAI_Turnbull_Kausikan.mp3",
         "pub_time": "Thu, 16 Jan 2025 06:00:00 -0500"
+    },
+    {
+        "name": "REAL Magic & Occult Studies | British Tantra | Peter Grey on TRS",
+        "podcast_name": "Beer Biceps - The Ranveer Show",
+        "episode_link": "https://the-ranveer-show.simplecast.com/episodes/real-magic-occult-studies-british-tantra-peter-grey-on-trs-zwo_XpEf",
+        "link": "https://chtbl.com/track/67CA4G/cdn.simplecast.com/audio/a4c022ca-6988-4cf6-98f6-5b98210d01b4/episodes/a42760e3-33dc-47da-8fb2-ee39fb3752d8/audio/1cd99ae7-8d47-4e93-9c37-950e96f5a06c/default_tc.mp3?aid=rss_feed&feed=7PWFZi_d",
+        "pub_time": "Thu, 16 Jan 2025 16:24:35 +0000"
     }
 ]
