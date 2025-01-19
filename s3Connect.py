@@ -77,6 +77,7 @@ class S3Uploader:
         try:
             
             full_key = self._get_full_key(key)
+            print (full_key)
             self.s3_client.put_object(
                 Bucket=self.bucket_name,
                 Key=full_key,

@@ -181,7 +181,7 @@ def send_mail(content):
 def create_s3_file(filename, content, prefix):
   formatted_date = get_now()
   uploader = S3Uploader(
-    bucket_name="podcast.monitor",
+    bucket_name=get_bucket_name(),
     prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
   )
   uploader.upload_string(
