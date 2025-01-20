@@ -1,0 +1,17 @@
+control "Monitor" as m
+collections "Feed \nStores"  as feeds
+entity "Transcription" as t
+entity "OpenAI \nWhisper" as w
+database "S3 Bucket" as s3
+entity "Summarizer" as s
+entity "Ollama \n(LLama 3.2)" as ollama 
+boundary "Mailjet" as mail
+
+m -->m: Feeds to \nmonitor
+m-->feeds: Check for \nnew Episodes \n and write to local file
+m->t: Start Transcription
+t-->t: find links to \nbe transcribed
+t->s3: check if transcriptions \nfiles already exists or not
+t->w: use openai whisper \ntranscribe service
+t-s3: write transcription in file in json 
+

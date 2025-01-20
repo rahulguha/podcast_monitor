@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 cutoff_date = str_to_datetime( os.getenv('CUTOFFDATE', '2025/1/3'), "%Y/%m/%d")
 # transcription_folder=os.getenv("TRANSCRIPTIONFOLDER", "transcribed")
-
+∂
 feeds = load_json("content_monitor.json")
 episodes = monitor_podcast(feeds, cutoff_date)
 
