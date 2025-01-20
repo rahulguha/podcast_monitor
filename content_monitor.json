@@ -33,8 +33,20 @@
         "name": "Beer Biceps - The Ranveer Show",
         "FeedLink": "https://feeds.simplecast.com/7PWFZi_d"
 
+    },
+    {
+        "category": [
+            "Interviews",
+            "Politics",
+            "New York Times"
+        ],
+        "name": "The Interviews - New York Times",
+        "FeedLink": "https://feeds.simplecast.com/ksGYZ_Z3"
+
     }
 
 
+
+    
 ]
 

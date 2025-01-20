@@ -4,6 +4,10 @@ import os
 import re
 from typing import List, Dict, Optional 
 from string import Template
+from bs4 import BeautifulSoup
+import markdown
+import commonmark
+from markdownify import markdownify
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -156,7 +160,8 @@ def send_mail(content):
   # try:
   mailjet = MailjetClient(api_key, api_secret)
   now = datetime.now()
-  formatted_date = now.strftime("%m-%d-%y")
+  # formatted_date = now.strftime("%m-%d-%y")
+  formatted_date = now.strftime("%B %d %A %Y")
   dynamic_content = {
       "date_string": formatted_date,
       "content_html": content
@@ -229,7 +234,7 @@ def read_s3_file(  key) ->str:
 
 def summary_to_html(podcast_name="", episode_name="", episode_link="", sum_text=""):
   
-
+  sum_text = convert_markdown_to_html(sum_text)
   # Sample JSON data
   data = {
       "podcast_name": podcast_name,
@@ -252,6 +257,75 @@ def summary_to_html(podcast_name="", episode_name="", episode_link="", sum_text=
 
   # Replace placeholders with actual data from JSON
   html_output = template.safe_substitute(data)
+  html_output = prettify_html(html_output)
 
   return(html_output)
 
+
+def prettify_html(html_text: str) -> str:
+    """
+    Format HTML to be more readable
+    """
+    try:
+        soup = BeautifulSoup(html_text, 'html.parser')
+        return soup.prettify()
+    except Exception as e:
+        print(f"Error prettifying HTML: {e}")
+        return html_text
+
+def convert_markdown_to_html(markdown_text: str, method: str = 'python-markdown') -> str:
+    """
+    Convert Markdown to HTML using different methods
+    
+    Args:
+        markdown_text (str): The markdown text to convert
+        method (str): Conversion method ('python-markdown', 'commonmark', or 'custom')
+    
+    Returns:
+        str: The converted HTML
+    """
+    try:
+        if method == 'python-markdown':
+            # Using python-markdown (more features)
+            return markdown.markdown(
+                markdown_text,
+                extensions=['tables', 'fenced_code', 'codehilite', 'toc']
+            )
+            
+        elif method == 'commonmark':
+            # Using commonmark (strictly follows CommonMark spec)
+            parser = commonmark.Parser()
+            renderer = commonmark.HtmlRenderer()
+            ast = parser.parse(markdown_text)
+            return renderer.render(ast)
+            
+        elif method == 'custom':
+            # Basic custom conversion (example for simple cases)
+            lines = markdown_text.split('\n')
+            html_lines = []
+            
+            for line in lines:
+                # Headers
+                if line.startswith('# '):
+                    html_lines.append(f'<h1>{line[2:]}</h1>')
+                elif line.startswith('## '):
+                    html_lines.append(f'<h2>{line[3:]}</h2>')
+                # Bold
+                elif '**' in line:
+                    line = line.replace('**', '<strong>', 1)
+                    line = line.replace('**', '</strong>', 1)
+                    html_lines.append(f'<p>{line}</p>')
+                # Regular paragraph
+                elif line.strip():
+                    html_lines.append(f'<p>{line}</p>')
+                else:
+                    html_lines.append('<br>')
+                    
+            return '\n'.join(html_lines)
+        
+        else:
+            raise ValueError(f"Unsupported method: {method}")
+            
+    except Exception as e:
+        print(f"Error converting markdown to HTML: {e}")
+        return ""

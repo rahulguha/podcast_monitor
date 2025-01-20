@@ -1,5 +1,4 @@
-import os
-import glob
+
 
 from util import *
 
@@ -13,20 +12,22 @@ def summerize_podcasts(source, destination):
     
     transcribed_files = list_s3_files("podcast.monitor", f"transcriptions/{get_now()}" )
     summarized_files = list_s3_files("podcast.monitor", f"summary/{get_now()}" )
-    
+    if summarized_files is None:
+        summarized_files = []
+    if transcribed_files is None:
+        transcribed_files = []
     for t in transcribed_files:
         content =""
+    
         if any(s["name"] == t["name"] for s in summarized_files):
-            print ("summary file exists")
+            print (f"summary file exists {t["name"]}")
         else:
             # read the transcription
-            print (t)
             try: 
                 podcast_name=""
                 episode_name=""
                 episode_link=""
                 raw_file = read_s3_file(t["key"])
-                # print (raw_file)
                 content = json.loads(raw_file)
                 podcast_name = content["Podcast Name"]
                 episode_name = content["Episode Name"]
