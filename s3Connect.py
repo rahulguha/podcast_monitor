@@ -37,7 +37,7 @@ class S3Uploader:
                 'Bucket': bucket_name,
                 'Prefix': prefix
             }
-            print(params)
+            # print(params)
             files = []
             paginator = self.s3_client.get_paginator('list_objects_v2')
         
@@ -77,7 +77,7 @@ class S3Uploader:
         try:
             
             full_key = self._get_full_key(key)
-            print (full_key)
+            # print (full_key)
             self.s3_client.put_object(
                 Bucket=self.bucket_name,
                 Key=full_key,
@@ -210,6 +210,52 @@ class S3Uploader:
             print(f"Error reading file from S3: {e}")
             return None
 
+    def list_s3_folders1(bucket_name, prefix='', debug=True):
+        s3_client = boto3.client('s3')
+    
+        # Remove leading slash from prefix
+        prefix = prefix.lstrip('/')
+        
+        try:
+            # List objects directly
+            response = s3_client.list_objects_v2(
+                Bucket=bucket_name, 
+                Prefix=prefix,
+                Delimiter='/'
+            )
+            
+            # Extract folders and objects
+            folders = [
+                obj['Prefix'] for obj in response.get('CommonPrefixes', [])
+            ]
+            
+            # If no folders, list all objects under prefix
+            if not folders:
+                objects = [
+                    obj['Key'] for obj in response.get('Contents', [])
+                    if obj['Key'] != prefix
+                ]
+                return objects
+            
+            return folders
+        
+        except Exception as e:
+            print(f"Error: {e}")
+            return []
+
+
+    def list_s3_folders(bucket_name, prefix=''):
+        # s3 = boto3.client('s3')
+        s3 = boto3.resource('s3')
+
+        # List objects with the specified prefix
+        # paginator = s3.get_paginator('list_objects_v2')
+        folders = set()
+        bucket = s3.Bucket(bucket_name)
+        for obj in bucket.objects.filter(Prefix=prefix, Delimiter='/'):
+            if obj.key != prefix:
+                folders.add(obj.key)
+        return list(folders)
 # Example usage
 if __name__ == "__main__":
     now = datetime.now()

@@ -18,7 +18,44 @@ from datetime import date, datetime
 from email_client import MailjetClient
 from s3Connect import S3Uploader
 
+from util_logging import S3LogHandler
+from util_logging import *
 
+# logger = setup_logger()
+# logger.info("Starting data processing")
+# logger = setup_logger()
+logger = setup_logger()
+
+def log(level, message):
+   level_map = {
+       'debug': logger.debug,
+       'info': logger.info,
+       'warning': logger.warning,
+       'error': logger.error,
+       'critical': logger.critical
+   }
+   
+   log_method = level_map.get(level.lower())
+   if log_method:
+       log_method(message)
+   else:
+       logger.warning(f"Invalid log level: {level}. Message: {message}")
+def filter_dates_after_cutoff(dates):
+    cutoff_date = get_cutoff_date()
+    cutoff = datetime.strptime(cutoff_date, '%m-%d-%Y')
+    return [date for date in dates if datetime.strptime(date, '%m-%d-%Y') > cutoff]
+
+
+def get_cutoff_date():
+  cutoff_date = os.getenv("CUTOFFDATE")
+  year, month, day = cutoff_date.split('/')
+    
+    # Rearrange the components
+  return f"{month}-{day}-{year}"
+  # now = datetime.now()
+  # formatted_date = now.strftime("%m-%d-%Y")
+  # return formatted_date
+   
 def generate_python_friendly_filename(input_string):
   """
   Generates a Python-friendly filename from a given string.
@@ -154,6 +191,7 @@ def join_path_with_subfolders(*args):
   """
   return os.path.join(*args)
 
+# Email 
 def send_mail(content):
   api_key = os.getenv("MJ_APIKEY_PUBLIC")
   api_secret =os.getenv("MJ_APIKEY_PRIVATE")
@@ -183,6 +221,7 @@ def send_mail(content):
   # except:
   #   print ("error sending email")
 
+# S3 related 
 def create_s3_file(filename, content, prefix):
   formatted_date = get_now()
   uploader = S3Uploader(
@@ -211,14 +250,19 @@ def list_s3_files(
     Returns:
         List[Dict]: List of dictionaries containing file information
     """
-    now = datetime.now()
-    formatted_date = now.strftime("%m-%d-%y")
+  
+    if prefix=="":
+      now = datetime.now()
+      formatted_date = now.strftime("%m-%d-%y")
+    else :
+      formatted_date=prefix
     
     uploader = S3Uploader(
       bucket_name=bucket_name,
-      prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
+      # prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
+      prefix=f"{prefix}"  # All files will be uploaded under this prefix
     )
-    
+        
     return uploader.list_files_by_bucket(bucket_name, prefix)
 def get_bucket_name() ->str:
    return os.getenv("S3_BUCKET")
@@ -230,15 +274,23 @@ def read_s3_file(  key) ->str:
       prefix=""  # All files will be uploaded under this prefix
     )
   return uploader.read_s3_file(key)
-
-
-def summary_to_html(podcast_name="", episode_name="", episode_link="", sum_text=""):
+def get_s3_folders(type):
+  folders = []
+  for f in S3Uploader.list_s3_folders1(f"{get_bucket_name()}", f"{type}"):
+     folders.append (f.split('/')[-2])    
+  return (filter_dates_after_cutoff(folders))
   
+
+# HTML Related
+def summary_to_html(podcast_name="", episode_name="", episode_link="", pub_date="", sum_text=""):
+  
+  print ( f"pub date - {pub_date}")
   sum_text = convert_markdown_to_html(sum_text)
   # Sample JSON data
   data = {
       "podcast_name": podcast_name,
       "episode_name": episode_name,
+      "pub_date"    : pub_date,
       "episode_link": episode_link,
       "sum_text": sum_text
   }
@@ -247,6 +299,7 @@ def summary_to_html(podcast_name="", episode_name="", episode_link="", sum_text=
   html_template = """
       <h2>${podcast_name}</h2>
       <h3>${episode_name}</h3>
+      <h4>Published on ${pub_date}</h4>
       <div><a href=${episode_link}> Open Episode</a></div>
       <br/>
       <div>${sum_text}</div>
