@@ -56,12 +56,12 @@
     },
     {
         "category": [
-            "India",
-            "Politics",
-            "Interviews"
+            "TED Talks",
+            "Innovation",
+            "Achievements"
         ],
-        "name": "Lallontop",
-        "FeedLink": "https://anchor.fm/s/a6451554/podcast/rss"
+        "name": "TED Radio Hour",
+        "FeedLink": "https://feeds.npr.org/510298/podcast.xml"
 
     }
 
