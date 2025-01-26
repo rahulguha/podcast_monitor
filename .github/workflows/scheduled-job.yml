@@ -29,6 +29,15 @@ jobs:
     - name: Display .env file (For Debugging, Remove in Production)
       run: cat .env
       # Step 2: Set up Python
+    
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Verify FFmpeg Installation
+      run: ffmpeg -version
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
