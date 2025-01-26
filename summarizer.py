@@ -24,7 +24,7 @@ def summerize_podcasts(source, destination):
     
         if any(s["name"] == t["name"] for s in summarized_files):
             # print (f"summary file exists {t["name"]}")
-            log("info", f"summarization::# summary files exists - {t["name"]}")
+            log("info", f"summarization::# summary files exists - {t['name']}")
         else:
             # read the transcription
             try: 
