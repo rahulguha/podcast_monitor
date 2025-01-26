@@ -12,8 +12,10 @@ def summerize_podcasts(source, destination):
     
     transcribed_files = list_s3_files(get_bucket_name(), f"transcriptions/{get_now()}" )
     summarized_files = list_s3_files(get_bucket_name(), f"summary/{get_now()}" )
-    log("info", f"summarization::# transcribed files - {len(transcribed_files)}")
-    log("info", f"summarization::# summary files - {len(summarized_files)}")
+    if transcribed_files:
+        log("info", f"summarization::# transcribed files - {len(transcribed_files)}")
+    if summarized_files:
+        log("info", f"summarization::# summary files - {len(summarized_files)}")
     if summarized_files is None:
         summarized_files = []
     if transcribed_files is None:
