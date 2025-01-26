@@ -43,10 +43,20 @@
         "name": "The Interviews - New York Times",
         "FeedLink": "https://feeds.simplecast.com/ksGYZ_Z3"
 
+    },
+    {
+        "category": [
+            "Interviews",
+            "Politics",
+            "New York Times"
+        ],
+        "name": "Ezra Clein Show - New York Times",
+        "FeedLink": "https://feeds.simplecast.com/82FI35Px"
+
     }
 
 
-
+    
     
 ]
 
