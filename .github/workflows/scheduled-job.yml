@@ -49,7 +49,7 @@ jobs:
           ollama --version  # Verify installation
     
     - name: Run Ollama Command
-      run: ollama run llama3.2 | ollama serve
+      run: ollama run llama3.2 
         # Step 3: Install dependencies (if any)
     - name: Install dependencies
       run: |
