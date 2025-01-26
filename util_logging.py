@@ -9,7 +9,7 @@ def get_now() ->str:
   formatted_date = now.strftime("%m-%d-%Y")
   return formatted_date
 class S3LogHandler(logging.Handler):
-   def __init__(self, bucket='podcast.monitor', prefix='app_logs/'):
+   def __init__(self, bucket='podcast.monitor', prefix='app_logs_github/'):
        super().__init__()
        self.s3_client = boto3.client('s3')
        self.bucket = bucket
@@ -46,7 +46,7 @@ class S3LogHandler(logging.Handler):
            print(f"S3 Log Upload Failed: {e}")
 
 
-def setup_logger(bucket='podcast.monitor', prefix='app_logs/'):
+def setup_logger(bucket='podcast.monitor', prefix='app_logs_github/'):
    logger = logging.getLogger('S3Logger')
    logger.setLevel(logging.INFO)
 
