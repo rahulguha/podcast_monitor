@@ -3,7 +3,9 @@ name: Run Scheduled Python Script
 # Schedule the workflow to run
 on:
   schedule:
-    - cron: "0 6 * * *" # Runs daily at 6:00 AM UTC
+    # 6 AM Central Time = 11 AM or 12 PM UTC
+    - cron: '0 11 * * *'  # During Standard Time (UTC-6)
+    - cron: '0 12 * * *'  # During Daylight Saving Time (UTC-5)
   workflow_dispatch: # Allows manual trigger of the workflow
 
 jobs:
