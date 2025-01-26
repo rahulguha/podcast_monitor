@@ -42,8 +42,14 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.12.2 # Specify the Python version you need
-
     
+    - name: Install Ollama
+      run: |
+          curl -fsSL https://ollama.com/install.sh | bash  # Example installation script
+          ollama --version  # Verify installation
+    
+    - name: Run Ollama Command
+      run: ollama run llama3.2 | ollama serve
         # Step 3: Install dependencies (if any)
     - name: Install dependencies
       run: |
