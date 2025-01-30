@@ -1,14 +1,37 @@
+# Please install OpenAI SDK first: `pip3 install openai`
 
-
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 from util import *
-
 import requests
 
 
-OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
+load_dotenv()
 
 
-def summerize_podcasts(source, destination):
+
+client = OpenAI(api_key=os.getenv("DEEPSEEK_API_KEY"), base_url="https://api.deepseek.com")
+system_prompt = '''
+                            Summarize the text given to you in roughly 100 words in 3 bullet points. 
+                            Remove any product promotions.
+                            Don't try to figure out what type of transcription it is.
+                            Don't exceed the 100 word limit.
+                '''
+
+# response = client.chat.completions.create(
+#     model="deepseek-chat",
+#     messages=[
+#         {"role": "system", "content": system_prompt},
+#         {"role": "user", "content": "Can you please tell me a Chinese Joke ?"},
+#     ],
+#     stream=False
+# )
+
+# print(response.choices[0].message.content)
+
+
+def summerize_podcasts1(source, destination):
     
     transcribed_files = list_s3_files(get_bucket_name(), f"transcriptions/{get_now()}" )
     summarized_files = list_s3_files(get_bucket_name(), f"summary/{get_now()}" )
@@ -23,7 +46,6 @@ def summerize_podcasts(source, destination):
         
     for t in transcribed_files:
         content =""
-        duration = ""
     
         if any(s["name"] == t["name"] for s in summarized_files):
             # print (f"summary file exists {t["name"]}")
@@ -39,32 +61,23 @@ def summerize_podcasts(source, destination):
                 podcast_name = content["Podcast Name"]
                 episode_name = content["Episode Name"]
                 episode_link = content["Episode Link"]
-                duration = content["duration"] 
-                if duration == "":
-                    duration = "duration not found"
                 content = content["text"]
             except KeyError:
                 pass
             
-            system_prompt = '''
-                            Summarize the text given to you in 3 bullet points roughly 100 words in length. 
-                            Remove any product promotions.
-                            Be specific, remove any guesses, use third person like "This episodes talks about ..."
-                            Please don't use following word "trinscription", "appears to" etc.
-                            Don't exceed the 100 word limit. Be formal about your style
-                            '''
-
-            OLLAMA_PROMPT = f"{system_prompt}: {content}"
-            OLLAMA_DATA = {
-                "model": "llama3.2",
-                # "model": "deepseek-r1",
-                # "model": "gemma2",
-                "prompt": OLLAMA_PROMPT,
-                "stream": False,
-                "keep_alive": "1m",
-            }
-            response = requests.post(OLLAMA_ENDPOINT, json=OLLAMA_DATA)
-            html_response = summary_to_html(podcast_name, episode_name, episode_link, f"{get_now()}", duration, response.json()["response"])
+            
+            response = client.chat.completions.create(
+                model="deepseek-chat",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": f"{content}"},
+                ],
+                stream=False
+            )
+            # print (response.choices[0].message.content)
+            # response = requests.post(OLLAMA_ENDPOINT, json=OLLAMA_DATA)
+            # print (response)
+            html_response = summary_to_html(podcast_name, episode_name, episode_link, f"{get_now()}", response.choices[0].message.content)
             create_s3_file(t["name"], html_response, "summary")
             log("info", f"summarization::# summary created successfully - {t["name"]}")
     

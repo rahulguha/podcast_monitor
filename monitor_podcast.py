@@ -8,25 +8,26 @@ from util import *
 import prettyprint 
 
 class Episode:
-  def __init__(self, name, podcast_name, episode_link, link, pub_time):
+  def __init__(self, name, podcast_name, episode_link, link, pub_time, duration):
     self.name = name
     self.podcast_name = podcast_name
     self.episode_link = episode_link
     self.link = link
     self.pub_time = pub_time
+    self.duration = duration
   def __eq__(self, other):
         if isinstance(other, Episode):
-            return self.name == other.name and self.podcast_name == podcast_name and self.episode_link and  self.link  == other.link and self.pub_time  == other.pub_time
+            return self.name == other.name and self.podcast_name == podcast_name and self.episode_link and  self.link  == other.link and self.pub_time  == other.pub_time and self.duration == other.duration
         return False
   def __hash__(self):
-      return hash((self.name, self.podcast_name, self.link, self.pub_time))
+      return hash((self.name, self.podcast_name, self.link, self.pub_time, self.duration))
   def to_dict(self):
-    return {"name": self.name, "podcast_name": self.podcast_name, "episode_link": self.episode_link, "link": self.link, "pub_time": self.pub_time}
+    return {"name": self.name, "podcast_name": self.podcast_name, "episode_link": self.episode_link, "link": self.link, "pub_time": self.pub_time, "duration": self.duration}
 
 def add_to_array_if_not_exists(obj, arr):
     if obj not in arr:
         arr.append(obj)
-        print (f"added {obj.episode_link}")
+        # print (f"added {obj.duration}")
 
 def monitor_podcast(feed_url, cutoff_date, interval=30):
   """
@@ -57,22 +58,28 @@ def monitor_podcast(feed_url, cutoff_date, interval=30):
       time.sleep(interval)
       continue
     for f in feed.entries:
+      # pprint(f)
       if str_to_datetime(f.published) > cutoff_date:
-        # f_published_dt = datetime.strptime(f.published, date_format)
-        # pub_date_est =  f_published_dt.replace(tzinfo=pytz.timezone('US/Eastern'))
-        # print(f"Episode Name: {f.title }.\n Published: {pub_date_est} \n")
-        episode_link = ""
-        audio_link=""
-        for link in f.links:
-          if link.type == "text/html":
-             episode_link=link.href
-          if link.type == "audio/mpeg":
-            audio_link = link.href
-        if episode_link=="":
-           episode_link = audio_link
-        episode_obj = Episode(f.title, channel["name"], episode_link, audio_link,f.published)
-        add_to_array_if_not_exists(episode_obj, episodes)
-            # add_if_not_exists_multi(episodes,episode_obj, )
+        # check if it's cut the clutter
+        if channel["name"] == "The Print - Cut the Clutter":
+           if "CutTheCLutter:" in f.title:
+            # get only cut the clutter
+            episode_link = ""
+            audio_link=""
+            duration = ""
+
+            for link in f.links:
+              if link.type == "text/html":
+                episode_link=link.href
+              if link.type == "audio/mpeg":
+                audio_link = link.href
+            if episode_link=="":
+              episode_link = audio_link
+            duration = f.get('itunes_duration', 'Duration not available')
+            # print(f"duration - {duration}")
+            episode_obj = Episode(f.title, channel["name"], episode_link, audio_link,f.published, duration)
+            add_to_array_if_not_exists(episode_obj, episodes)
+                # add_if_not_exists_multi(episodes,episode_obj, )
 
   data = [obj.to_dict() for obj in episodes]
   return data
@@ -80,9 +87,10 @@ def monitor_podcast(feed_url, cutoff_date, interval=30):
 
 
 def persist_episodes_to_be_processed(episodes, filepath):
-  
+  pprint(f"episode 0 - {json.dumps(episodes[0])}")
  # Write data to JSON file
   with open(filepath, 'w') as outfile:
+      # pprint(episodes)
       json.dump(episodes, outfile, indent=4) 
   print (f"Successfully written {len(episodes)} records")
 

@@ -63,6 +63,15 @@
         "name": "TED Radio Hour",
         "FeedLink": "https://feeds.npr.org/510298/podcast.xml"
 
+    },
+    {
+        "category": [
+            "India",
+            "Politics"
+        ],
+        "name": "The Print - Cut the Clutter",
+        "FeedLink": "https://feed.podbean.com/theprint/feed.xml"
+
     }
 
 

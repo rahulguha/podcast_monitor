@@ -33,7 +33,9 @@ def transcribe_podcasts(source_file_path):
                         'link': audiofile["link"], 
                         'episode_link': audiofile["episode_link"],
                         'name': audiofile["name"],
-                        'podcast_name': audiofile["podcast_name"]
+                        'podcast_name': audiofile["podcast_name"],
+                        'duration': audiofile["duration"],
+                        'pub_time': audiofile["pub_time"]
                     })
     log("info", f"transcription::# of audio to be transcribed - {len(file_to_be_transcribed)}")
     for f in file_to_be_transcribed:
@@ -42,6 +44,7 @@ def transcribe_podcasts(source_file_path):
             "Episode Name": f["name"],
             "Podcast Name": f["podcast_name"],
             "Episode Link": f["episode_link"],
+            "duration": f["duration"],
             "text": transcription_text
         }
         log("info", f"transcription::transcribed object metadata - \nEpisode Name - {transcription_object['Episode Name']} ")

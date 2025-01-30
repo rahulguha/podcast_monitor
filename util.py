@@ -282,7 +282,7 @@ def get_s3_folders(type):
   
 
 # HTML Related
-def summary_to_html(podcast_name="", episode_name="", episode_link="", pub_date="", sum_text=""):
+def summary_to_html(podcast_name="", episode_name="", episode_link="", pub_date="", duration="", sum_text=""):
   
   print ( f"pub date - {pub_date}")
   sum_text = convert_markdown_to_html(sum_text)
@@ -291,6 +291,7 @@ def summary_to_html(podcast_name="", episode_name="", episode_link="", pub_date=
       "podcast_name": podcast_name,
       "episode_name": episode_name,
       "pub_date"    : pub_date,
+      "duration"    : duration,
       "episode_link": episode_link,
       "sum_text": sum_text
   }
@@ -300,7 +301,7 @@ def summary_to_html(podcast_name="", episode_name="", episode_link="", pub_date=
       <h2>${podcast_name}</h2>
       <h3>${episode_name}</h3>
       <h4>Published on ${pub_date}</h4>
-      <div><a href=${episode_link}> Open Episode</a></div>
+      <div><a href=${episode_link}> Open Episode</a> :  ${duration}</div>
       <br/>
       <div>${sum_text}</div>
   """

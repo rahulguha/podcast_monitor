@@ -7,7 +7,7 @@ sequenceDiagram
     participant w as Whisper
     participant s3 
     participant summ as Summarizer
-    participant o as Ollama
+    participant o as Ollama @ <br/>GitHub Actions
 
     participant mail as Mailjet <br/>Engine
     
@@ -19,10 +19,8 @@ sequenceDiagram
     
     
     m ->>t: Start Transcription
-    t->t: check if feeds <br/>to be transcribed
     t->s3: check if transcription already done
     Note over t, w: Transcribe new audio files
-
     t->>s3: store transcribed files as json.dump <br/>preserving episode metadata
     t->>m: transcription complete
 

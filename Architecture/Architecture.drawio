@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="iSE-BYIHh8CY65DjldPa">
-        <mxGraphModel dx="1628" dy="1066" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1570" dy="1209" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,7 +13,7 @@
                 <mxCell id="VPsLKvTVY1jadgCigQuc-9" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-3" target="VPsLKvTVY1jadgCigQuc-8" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-3" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Feed Monitor&lt;/font&gt;&lt;/b&gt;&lt;br&gt;(check for new episodes per cutoff date)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-3" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Feed Monitor&lt;/font&gt;&lt;/b&gt;&lt;br&gt;(check for new episodes per cutoff date)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#60a917;fontColor=#000033;strokeColor=#2D7600;" parent="1" vertex="1">
                     <mxGeometry x="-178" y="137" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="VPsLKvTVY1jadgCigQuc-4" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.494;entryY=0.932;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-3" target="VPsLKvTVY1jadgCigQuc-2" edge="1">
@@ -42,16 +42,16 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-17" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Transcriber&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(transcribe audio files)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-17" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Transcriber&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(transcribe audio files)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#1ba1e2;fontColor=#000033;strokeColor=#006EAF;" parent="1" vertex="1">
                     <mxGeometry x="84" y="142" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-23" value="" style="group;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1" connectable="0">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-23" value="" style="group;rounded=0;" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="-22.999999999999996" y="140" width="67.2" height="83" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-8" value="" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.local_disk;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="VPsLKvTVY1jadgCigQuc-23" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-8" value="" style="shadow=0;dashed=0;html=1;strokeColor=#B09500;fillColor=#e3c800;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.local_disk;sketch=1;curveFitting=1;jiggle=2;rounded=0;fontColor=#000000;" parent="VPsLKvTVY1jadgCigQuc-23" vertex="1">
                     <mxGeometry x="10" width="57.2" height="56.8" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-22" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;New Episodes&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" parent="VPsLKvTVY1jadgCigQuc-23" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-22" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;New&lt;br&gt;Episodes&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" parent="VPsLKvTVY1jadgCigQuc-23" vertex="1">
                     <mxGeometry y="53" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="VPsLKvTVY1jadgCigQuc-24" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-10" target="VPsLKvTVY1jadgCigQuc-17" edge="1">
@@ -60,7 +60,7 @@
                 <mxCell id="VPsLKvTVY1jadgCigQuc-29" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-25" target="VPsLKvTVY1jadgCigQuc-28" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-25" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Summarizer&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(Creates Summary)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-25" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Summarizer&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(Creates Summary)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
                     <mxGeometry x="-3" y="424.34" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="VPsLKvTVY1jadgCigQuc-28" value="Local Ollama &#10;running LLama 3.2" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://ih1.redbubble.net/image.5611428487.0532/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
@@ -72,7 +72,7 @@
                 <mxCell id="VPsLKvTVY1jadgCigQuc-35" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-31" target="VPsLKvTVY1jadgCigQuc-34" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-31" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Email&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(Sends Email)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-31" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Email&lt;br&gt;&lt;/b&gt;&lt;/span&gt;(Sends Email)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#d0cee2;strokeColor=#56517e;" parent="1" vertex="1">
                     <mxGeometry x="196" y="276.38" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="VPsLKvTVY1jadgCigQuc-32" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-10" target="VPsLKvTVY1jadgCigQuc-31" edge="1">
@@ -93,7 +93,7 @@
                 <mxCell id="VPsLKvTVY1jadgCigQuc-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="VPsLKvTVY1jadgCigQuc-17" target="VPsLKvTVY1jadgCigQuc-7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="VPsLKvTVY1jadgCigQuc-10" value="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Driver (monitor.py)&lt;/font&gt;&lt;/b&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#0050ef;fontColor=#000033;strokeColor=#001DBC;" parent="1" vertex="1">
+                <mxCell id="VPsLKvTVY1jadgCigQuc-10" value="&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Driver (monitor.py)&lt;/font&gt;&lt;/b&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;sketch=1;curveFitting=1;jiggle=2;rounded=0;fillColor=#a20025;strokeColor=#6F0000;fontColor=#000033;" parent="1" vertex="1">
                     <mxGeometry x="-9" y="264" width="149" height="89" as="geometry"/>
                 </mxCell>
                 <mxCell id="VPsLKvTVY1jadgCigQuc-11" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.gauge;sketch=1;curveFitting=1;jiggle=2;rounded=0;" parent="1" vertex="1">
