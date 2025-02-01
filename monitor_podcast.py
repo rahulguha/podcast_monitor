@@ -28,7 +28,24 @@ def add_to_array_if_not_exists(obj, arr):
     if obj not in arr:
         arr.append(obj)
         # print (f"added {obj.duration}")
+def populate_episode(f, channel_name):
+   # get only cut the clutter
+    episode_link = ""
+    audio_link=""
+    duration = ""
 
+    for link in f.links:
+      if link.type == "text/html":
+        episode_link=link.href
+      if link.type == "audio/mpeg":
+        audio_link = link.href
+    if episode_link=="":
+      episode_link = audio_link
+    duration = f.get('itunes_duration', 'Duration not available')
+    # print(f"duration - {duration}")
+    episode_obj = Episode(f.title, channel_name, episode_link, audio_link,f.published, duration)
+    return episode_obj
+   
 def monitor_podcast(feed_url, cutoff_date, interval=30):
   """
   Monitors a podcast RSS feed for new episodes.
@@ -37,60 +54,49 @@ def monitor_podcast(feed_url, cutoff_date, interval=30):
     feed_url: The URL of the podcast RSS feed.
     interval: The time interval (in seconds) between checks.
   """
-  date_format = "%a, %d %b %Y %H:%M:%S %z"
+  # date_format = "%a, %d %b %Y %H:%M:%S %z"
   cutoff_date = cutoff_date.replace(tzinfo=pytz.timezone('US/Eastern'))
-  last_published = None
+  log("info", f"monitor-feed::cutoff-date - {cutoff_date}")
+  # last_published = None
   episodes = []
   # while True:
-  print (f"** processing {len(feed_url)} feeds")
   for channel in feed_url:
-    print (channel["name"])
+    log("info", f"monitor-feed::podcast name - {channel["name"]}")
+    
     try:
       feed = feedparser.parse(channel["FeedLink"])
       
     except Exception as e:
-      print(f"Error fetching feed: {e}")
+      log("error", f"monitor-feed:: error reaching {channel["FeedLink"]}... retrying")
       time.sleep(interval)
       continue
 
     if not feed.entries:
-      print("No episodes found in feed.")
+      log("info", f"monitor-feed::no episode found in - {channel["name"]}")
       time.sleep(interval)
       continue
     for f in feed.entries:
-      # pprint(f)
       if str_to_datetime(f.published) > cutoff_date:
         # check if it's cut the clutter
         if channel["name"] == "The Print - Cut the Clutter":
            if "CutTheCLutter:" in f.title:
-            # get only cut the clutter
-            episode_link = ""
-            audio_link=""
-            duration = ""
-
-            for link in f.links:
-              if link.type == "text/html":
-                episode_link=link.href
-              if link.type == "audio/mpeg":
-                audio_link = link.href
-            if episode_link=="":
-              episode_link = audio_link
-            duration = f.get('itunes_duration', 'Duration not available')
-            # print(f"duration - {duration}")
-            episode_obj = Episode(f.title, channel["name"], episode_link, audio_link,f.published, duration)
-            add_to_array_if_not_exists(episode_obj, episodes)
-                # add_if_not_exists_multi(episodes,episode_obj, )
+            episode_obj = populate_episode(f, channel["name"])
+            # add_to_array_if_not_exists(episode_obj, episodes)
+        else:
+          episode_obj = populate_episode(f, channel["name"])
+      add_to_array_if_not_exists(episode_obj, episodes)
+                   # add_if_not_exists_multi(episodes,episode_obj, )
 
   data = [obj.to_dict() for obj in episodes]
+  log("info", f"monitor-feed::no episodes to be transcribed  - {json.dumps(data)}")
   return data
   # time.sleep(interval)
 
 
 def persist_episodes_to_be_processed(episodes, filepath):
-  pprint(f"episode 0 - {json.dumps(episodes[0])}")
+  # pprint(f"episode 0 - {json.dumps(episodes[0])}")
  # Write data to JSON file
   with open(filepath, 'w') as outfile:
-      # pprint(episodes)
       json.dump(episodes, outfile, indent=4) 
   print (f"Successfully written {len(episodes)} records")
 
