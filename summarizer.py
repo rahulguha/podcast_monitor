@@ -10,8 +10,9 @@ OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
 
 def summerize_podcasts(source, destination):
     
-    transcribed_files = list_s3_files(get_bucket_name(), f"transcriptions/{get_now()}" )
-    summarized_files = list_s3_files(get_bucket_name(), f"summary/{get_now()}" )
+    transcribed_files = list_s3_files(get_bucket_name(), f"transcriptions" )
+    
+    summarized_files = list_s3_files(get_bucket_name(), f"summary" )
     if transcribed_files:
         log("info", f"summarization::# transcribed files - {len(transcribed_files)}")
     if summarized_files:
@@ -20,14 +21,16 @@ def summerize_podcasts(source, destination):
         summarized_files = []
     if transcribed_files is None:
         transcribed_files = []
-        
+    
+    # print(f"transcribed files {len(transcribed_files)}")
+    # print(f"summarized files {len(summarized_files)}")
     for t in transcribed_files:
         content =""
         duration = ""
     
         if any(s["name"] == t["name"] for s in summarized_files):
             # print (f"summary file exists {t["name"]}")
-            log("info", f"summarization::# summary files exists - {t['name']}")
+            log("debug", f"summarization::# summary files exists - {t['name']}")
         else:
             # read the transcription
             try: 
@@ -72,18 +75,28 @@ def summary_text(source):
     email_body = ""
     # cutoff_date = get_cutoff_date()
     folders = get_s3_folders("summary/")
+    # print(folders)
     summ_s3_files = []
     summ_filenames = []
-    for f in folders: 
-        # print (len(summ_s3_files))
-        folder_content = list_s3_files(get_bucket_name(), f"summary/{f}" )
-        for f in folder_content:
-            # get filename - then compare with array of summary filenames - if not match add
-            filename = strip_before_last_slash(f["key"])
-            if not filename in summ_filenames:
-                # add in both array
-                summ_s3_files.append(f)
-                summ_filenames.append(filename)
+    folder_content = list_s3_files(get_bucket_name(), f"summary" )
+    for f in folder_content:
+        filename = strip_before_last_slash(f["key"])
+        if not filename in summ_filenames:
+            summ_s3_files.append(f)
+            summ_filenames.append(filename)
+        # print(f['name'])
+    # for f in folders: 
+    #     # print (len(summ_s3_files))
+    #     folder_content = list_s3_files(get_bucket_name(), f"summary" )
+    #     # print(folder_content)
+    #     for f in folder_content:
+    #         # get filename - then compare with array of summary filenames - if not match add
+    #         filename = strip_before_last_slash(f["key"])
+    #         if not filename in summ_filenames:
+    #             # add in both array
+    #             summ_s3_files.append(f)
+    #             summ_filenames.append(filename)
+    
     summ_s3_files = sorted(
         summ_s3_files, 
         key=lambda x: x['last_modified'], 

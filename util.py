@@ -13,7 +13,7 @@ load_dotenv()
 
 # import yt_dlp
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from datetime import date, datetime
 from email_client import MailjetClient
 from s3Connect import S3Uploader
@@ -112,7 +112,31 @@ def get_now() ->str:
   formatted_date = now.strftime("%m-%d-%Y")
   return formatted_date
 
-   
+def date_gap_dates_list(date_str):
+    """Returns a list of dates (strings) between today and a past date (inclusive),
+       formatted as MM-DD-YYYY.
+
+    Args:
+        past_date_str: A string representing the past date in YYYY-MM-DD format.
+
+    Returns:
+        A list of strings representing the dates in the gap (inclusive of past and today),
+        formatted as MM-DD-YYYY.
+        Returns None if the date string is invalid.
+    """
+     # Convert the input date string to a datetime object
+    input_date = datetime.strptime(date_str, "%m-%d-%Y")
+    
+    # Get the current date
+    current_date = datetime.now()
+    
+    # Calculate the gap in days
+    gap = (current_date - input_date).days
+    
+    # Generate an array of date strings in mm-dd-yyyy format
+    date_array = [(input_date + timedelta(days=i)).strftime("%m-%d-%Y") for i in range(gap + 1)]
+    
+    return date_array
 def my_hook(d):
     if d['status'] == 'downloading':
         print ("###### downloading "+ str(round(float(d['downloaded_bytes'])/float(d['total_bytes'])*100,1))+"%")
@@ -221,6 +245,8 @@ def send_mail(content):
   # except:
   #   print ("error sending email")
 
+
+  
 # S3 related 
 def create_s3_file(filename, content, prefix):
   formatted_date = get_now()
@@ -250,20 +276,42 @@ def list_s3_files(
     Returns:
         List[Dict]: List of dictionaries containing file information
     """
-  
+    
+    file_list = []
     if prefix=="":
       now = datetime.now()
       formatted_date = now.strftime("%m-%d-%y")
     else :
       formatted_date=prefix
+    dates = date_gap_dates_list(get_cutoff_date())
     
-    uploader = S3Uploader(
-      bucket_name=bucket_name,
-      # prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
-      prefix=f"{prefix}"  # All files will be uploaded under this prefix
-    )
-        
-    return uploader.list_files_by_bucket(bucket_name, prefix)
+    for d in dates:
+      uploader = S3Uploader(
+        bucket_name=bucket_name,
+        # prefix=f"{prefix}/{formatted_date}"  # All files will be uploaded under this prefix
+        prefix=f"{prefix}/{d}/"  # All files will be uploaded under this prefix
+      )
+      folder_content = uploader.list_files_by_bucket(uploader.bucket_name ,uploader.prefix)
+      if folder_content!=None: 
+        file_list.append(folder_content)
+    # print (f"date {prefix} - {len(file_list)}")
+    files = []
+    # flatten
+    # print (file_list)
+    try: 
+      for d_f in file_list: 
+        for f in d_f:
+          files.append(f)           
+    except TypeError:
+      pass
+       
+    print (f"{prefix} - {len(files)}")
+      #  print(f[1]['name'])
+
+    # print (f"{prefix} - {len(file_list)}")
+    return files
+
+
 def get_bucket_name() ->str:
    return os.getenv("S3_BUCKET")
 def read_s3_file(  key) ->str:

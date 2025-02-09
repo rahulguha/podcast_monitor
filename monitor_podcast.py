@@ -56,23 +56,21 @@ def monitor_podcast(feed_url, cutoff_date, interval=30):
   """
   # date_format = "%a, %d %b %Y %H:%M:%S %z"
   cutoff_date = cutoff_date.replace(tzinfo=pytz.timezone('US/Eastern'))
-  log("info", f"monitor-feed::cutoff-date - {cutoff_date}")
+  log("debug", f"monitor-feed::cutoff-date - {cutoff_date}")
   # last_published = None
   episodes = []
   # while True:
   for channel in feed_url:
-    log("info", f"monitor-feed::podcast name - {channel["name"]}")
-    
+    log("debug", f"monitor-feed::podcast name - {channel["name"]}")   
     try:
       feed = feedparser.parse(channel["FeedLink"])
-      
     except Exception as e:
       log("error", f"monitor-feed:: error reaching {channel["FeedLink"]}... retrying")
       time.sleep(interval)
       continue
 
     if not feed.entries:
-      log("info", f"monitor-feed::no episode found in - {channel["name"]}")
+      log("info", f"monitor-feed::no new episode found in - {channel["name"]}")
       time.sleep(interval)
       continue
     for f in feed.entries:
@@ -88,7 +86,7 @@ def monitor_podcast(feed_url, cutoff_date, interval=30):
                    # add_if_not_exists_multi(episodes,episode_obj, )
 
   data = [obj.to_dict() for obj in episodes]
-  log("info", f"monitor-feed::no episodes to be transcribed  - {json.dumps(data)}")
+  log("debug", f"monitor-feed:episodes to be transcribed  - {json.dumps(data)}")
   return data
   # time.sleep(interval)
 
@@ -98,6 +96,7 @@ def persist_episodes_to_be_processed(episodes, filepath):
  # Write data to JSON file
   with open(filepath, 'w') as outfile:
       json.dump(episodes, outfile, indent=4) 
+  log("info", f"monitor-feed:persisted list  - {len(episodes)} records")
   print (f"Successfully written {len(episodes)} records")
 
 # if __name__ == "__main__":

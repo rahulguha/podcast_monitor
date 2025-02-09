@@ -7,7 +7,7 @@ from summarizer import *
 # from util_logging import  S3LogHandler
 # from util_logging import *
 
-log("info", "Starting process")
+log("info", "Starting session")
 # logger = setup_logger()
 # logger.info("Starting data processing")
 from dotenv import load_dotenv
@@ -20,10 +20,11 @@ feeds = load_json("content_monitor.json")
 episodes = monitor_podcast(feeds, cutoff_date)
 log("info", f"Number of new episodes - {len(episodes)}")
 persist_episodes_to_be_processed(episodes, "to_be_processed.json")
-log("info", f"New episode links persisted at to_be_processed.json")
+log("debug", f"New episode links persisted at to_be_processed.json")
 log("info", f"***** Starting transcription *****")
 transcribe_podcasts("to_be_processed.json")
 log("info", f"***** Starting Summarization *****")
 summerize_podcasts("transcriptions", "podcast_summary")
 log("info", f"***** Sending Email *****")
+# print(summary_text("podcast_summary"))
 send_mail(summary_text("podcast_summary"))

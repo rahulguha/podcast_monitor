@@ -1,8 +1,13 @@
 import logging
+import sys
 import boto3
 import io
 from datetime import datetime
 import threading
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # from util import *
 def get_now() ->str:
   now = datetime.now()
@@ -47,17 +52,29 @@ class S3LogHandler(logging.Handler):
 
 
 def setup_logger(bucket='podcast.monitor', prefix='app_logs_github/'):
-   logger = logging.getLogger('S3Logger')
-   logger.setLevel(logging.INFO)
+#    console_handler = logging.StreamHandler(sys.stdout)
 
-   # S3 Handler
-   s3_handler = S3LogHandler(bucket, prefix)
-   s3_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-   logger.addHandler(s3_handler)
+    logger = logging.getLogger('S3Logger')
+    logging_level= os.getenv("LOGGINGLEVEL")
+   
+    if logging_level == "DEBUG":
+        logger.setLevel(logging.DEBUG)
+    elif logging_level == "INFO":
+        logger.setLevel(logging.INFO)
+    elif logging_level == "ERROR":
+        logger.setLevel(logging.ERROR)
+    else:
+        logger.setLevel(logging.DEBUG)
+    
+    print (logger.level)
+    # S3 Handler
+    s3_handler = S3LogHandler(bucket, prefix)
+    s3_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+    logger.addHandler(s3_handler)
 
-   # Console Handler
-   console_handler = logging.StreamHandler()
-   console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-   logger.addHandler(console_handler)
+    # Console Handler
+    #    console_handler = logging.StreamHandler()
+    #    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+    #    logger.addHandler(console_handler)
 
-   return logger
+    return logger

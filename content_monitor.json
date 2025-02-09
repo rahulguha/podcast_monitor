@@ -26,16 +26,6 @@
     },
     {
         "category": [
-            "India",
-            "Politics",
-            "Humour"
-        ],
-        "name": "Beer Biceps - The Ranveer Show",
-        "FeedLink": "https://feeds.simplecast.com/7PWFZi_d"
-
-    },
-    {
-        "category": [
             "Interviews",
             "Politics",
             "New York Times"
@@ -71,6 +61,15 @@
         ],
         "name": "The Print - Cut the Clutter",
         "FeedLink": "https://feed.podbean.com/theprint/feed.xml"
+
+    },
+    {
+        "category": [
+            "Lifestyle",
+            "Friendship"
+        ],
+        "name": "A bit of Optimism - Simon Sinek",
+        "FeedLink": "https://feeds.simplecast.com/mDS2jisg"
 
     }
 
