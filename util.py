@@ -219,7 +219,7 @@ def join_path_with_subfolders(*args):
 def send_mail(content):
   api_key = os.getenv("MJ_APIKEY_PUBLIC")
   api_secret =os.getenv("MJ_APIKEY_PRIVATE")
-  # try:
+  
   mailjet = MailjetClient(api_key, api_secret)
   now = datetime.now()
   # formatted_date = now.strftime("%m-%d-%y")
@@ -230,17 +230,22 @@ def send_mail(content):
   }
   
   # Send an email
+  to_email = [
+     {"EMail": "rahul.guha@fmr.com", "Name": "Rahul FMR"},
+     {"EMail": "rahul.guha@gmail.com", "Name": "Rahul GMAIL"},
+     {"EMail": "nguha14@gmail.com", "Name": "Runa"}
+  ]
   response = mailjet.send_email(
-      from_email="recommendation@rahulguha.com",
+      from_email="postmaster@rahulguha.com",
       from_name="New Podcast Newsletter",
-      to_email="rahul.guha@gmail.com",
-      to_name="Rahul Guha",
+      to_email=to_email,
+      # to_name=["Rahul Guha FMR", "Rahul Gmail", "Runa"],
       subject=f"New Podcast List as of {formatted_date} ",
       text_content=content,
       variables=dynamic_content,
       html_content=None
   )
-  
+  log("info", f"{response}")
   return response  
   # except:
   #   print ("error sending email")

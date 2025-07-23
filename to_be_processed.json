@@ -1,5 +1,13 @@
 [
     {
+        "name": "The Anti-Vaccine Movement",
+        "podcast_name": "NPR - Throughline",
+        "episode_link": "https://www.npr.org/2025/02/13/1231104444/the-anti-vaccine-movement",
+        "link": "https://chrt.fm/track/138C95/prfx.byspotify.com/e/play.podtrac.com/npr-510333/traffic.megaphone.fm/NPR8879330995.mp3?d=2928&size=46856656&e=1231104444&t=podcast&p=510333",
+        "pub_time": "Thu, 13 Feb 2025 08:00:59 +0000",
+        "duration": "2928"
+    },
+    {
         "name": "Birthright Citizenship",
         "podcast_name": "NPR - Throughline",
         "episode_link": "https://www.npr.org/2025/02/06/1229439880/birthright-citizenship",
@@ -8,12 +16,36 @@
         "duration": "3464"
     },
     {
+        "name": "Trump\u2019s proposal to \u2018take over\u2019 Gaza",
+        "podcast_name": "Fareed Zakaria",
+        "episode_link": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chrt.fm/track/E31CC9/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1708404867.mp3?updated=1739144034",
+        "link": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chrt.fm/track/E31CC9/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1708404867.mp3?updated=1739144034",
+        "pub_time": "Sun, 09 Feb 2025 23:26:00 -0000",
+        "duration": "2565"
+    },
+    {
+        "name": "What Happened to Bidenomics?",
+        "podcast_name": "Foriegn Affairs",
+        "episode_link": "https://foreignaffairsmagazine.podbean.com/e/what-happened-to-bidenomics/",
+        "link": "https://mcdn.podbean.com/mf/web/2b7823e7jtyy75cm/Furman.mp3",
+        "pub_time": "Thu, 13 Feb 2025 06:00:00 -0500",
+        "duration": "47:41"
+    },
+    {
         "name": "Denzel Washington Has Finally Found His Purpose",
         "podcast_name": "The Interviews - New York Times",
         "episode_link": "https://www.nytimes.com/column/the-interview",
         "link": "https://dts.podtrac.com/redirect.mp3/pdst.fm/e/pfx.vpixl.com/6qj4J/nyt.simplecastaudio.com/db4d7883-cea7-4c02-bd16-15ce235fa210/episodes/bd4b7265-dfc5-4020-a983-03775c61c7cc/audio/128/default.mp3?aid=rss_feed&awCollectionId=db4d7883-cea7-4c02-bd16-15ce235fa210&awEpisodeId=bd4b7265-dfc5-4020-a983-03775c61c7cc&feed=ksGYZ_Z3",
         "pub_time": "Sat, 8 Feb 2025 10:00:00 +0000",
         "duration": "00:43:01"
+    },
+    {
+        "name": "What if Trump Just Ignores the Courts?",
+        "podcast_name": "Ezra Clein Show - New York Times",
+        "episode_link": "https://nytimes.com/2025/02/11/opinion/ezra-klein-podcast-quinta-jurecic.html",
+        "link": "https://dts.podtrac.com/redirect.mp3/pdst.fm/e/pfx.vpixl.com/6qj4J/nyt.simplecastaudio.com/3026b665-46df-4d18-98e9-d1ce16bbb1df/episodes/39ec6178-1d59-4fd9-940f-ef3453ea4583/audio/128/default.mp3?aid=rss_feed&awCollectionId=3026b665-46df-4d18-98e9-d1ce16bbb1df&awEpisodeId=39ec6178-1d59-4fd9-940f-ef3453ea4583&feed=82FI35Px",
+        "pub_time": "Tue, 11 Feb 2025 10:00:00 +0000",
+        "duration": "01:34:58"
     },
     {
         "name": "What Elon Musk Wants",
@@ -32,12 +64,28 @@
         "duration": "01:19:22"
     },
     {
+        "name": "Retracing the steps of their ancestors",
+        "podcast_name": "TED Radio Hour",
+        "episode_link": "https://www.npr.org/2025/02/14/1231335519/ted-radio-hour-retracing-their-steps",
+        "link": "https://chrt.fm/track/138C95/prfx.byspotify.com/e/play.podtrac.com/npr-510298/traffic.megaphone.fm/NPR7065423230.mp3?d=2975&size=47601834&e=1231335519&t=podcast&p=510298",
+        "pub_time": "Fri, 14 Feb 2025 08:00:59 +0000",
+        "duration": "2975"
+    },
+    {
         "name": "Who counts as a significant other?",
         "podcast_name": "TED Radio Hour",
         "episode_link": "https://www.npr.org/2025/02/07/1229744837/ted-radio-hour-who-counts-as-a-significant-other",
         "link": "https://chrt.fm/track/138C95/prfx.byspotify.com/e/play.podtrac.com/npr-510298/traffic.megaphone.fm/NPR9503511708.mp3?d=2977&size=47635271&e=1229744837&t=podcast&p=510298",
         "pub_time": "Fri, 07 Feb 2025 08:00:59 +0000",
         "duration": "2977"
+    },
+    {
+        "name": "The Secret Art of Micromanagement with Airbnb CEO Brian Chesky",
+        "podcast_name": "A bit of Optimism - Simon Sinek",
+        "episode_link": "https://www.iheart.com/podcast/269-a-bit-of-optimism-63444439/",
+        "link": "https://cdn.simplecast.com/audio/f1c74be6-1f84-499d-8047-797c33919c73/episodes/4c663228-6fc1-41b6-a2d9-1b30e83d6b9d/audio/42dc3dca-c759-4a75-9ed7-a93b9c298fc8/default_tc.mp3?aid=rss_feed&feed=mDS2jisg",
+        "pub_time": "Tue, 11 Feb 2025 08:00:00 +0000",
+        "duration": "00:44:06"
     },
     {
         "name": "You Are More Like Grammy-Winner Jacob Collier Than You Think",

@@ -61,6 +61,8 @@ def setup_logger(bucket='podcast.monitor', prefix='app_logs_github/'):
         logger.setLevel(logging.DEBUG)
     elif logging_level == "INFO":
         logger.setLevel(logging.INFO)
+    elif logging_level == "WARNING":
+        logger.setLevel(logging.WARNING)
     elif logging_level == "ERROR":
         logger.setLevel(logging.ERROR)
     else:

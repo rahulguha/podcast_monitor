@@ -17,7 +17,7 @@ class Episode:
     self.duration = duration
   def __eq__(self, other):
         if isinstance(other, Episode):
-            return self.name == other.name and self.podcast_name == podcast_name and self.episode_link and  self.link  == other.link and self.pub_time  == other.pub_time and self.duration == other.duration
+            return self.name == other.name and self.podcast_name == other.podcast_name and self.episode_link and  self.link  == other.link and self.pub_time  == other.pub_time and self.duration == other.duration
         return False
   def __hash__(self):
       return hash((self.name, self.podcast_name, self.link, self.pub_time, self.duration))
